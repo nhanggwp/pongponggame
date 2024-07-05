@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ComputerPaddle : Paddle
 {
-    public Rigidbody2D ball; // Tham chiếu đến Rigidbody2D của bóng
+    [SerializeField]
+    private Rigidbody2D ball; 
 
     private void FixedUpdate()
     {
@@ -13,19 +14,25 @@ public class ComputerPaddle : Paddle
 
         if (isBallMovingTowardsPaddle)
         {
-            if (ball.position.y > this.transform.position.y) {
-                _rigidbody.AddForce(Vector2.up * speed); // Di chuyển thanh trượt lên trên
-            } else if (ball.position.y < this.transform.position.y) {
-                _rigidbody.AddForce(Vector2.down * speed); // Di chuyển thanh trượt xuống dưới
+            if (ball.position.y > this.transform.position.y)
+            {
+                _rigidbody.AddForce(Vector2.up * speed); //Add force to move the paddle go up 
+            }
+            else if (ball.position.y < this.transform.position.y)
+            {
+                _rigidbody.AddForce(Vector2.down * speed); // Add force to move the paddle go up 
             }
         }
         else
         {
-            // Di chuyển về vị trí trung tâm và dừng lại ở đó cho đến khi bóng bắt đầu di chuyển về phía thanh trượt
-            if (this.transform.position.y > 0f) {
-                _rigidbody.AddForce(Vector2.down * speed); // Di chuyển thanh trượt xuống dưới
-            } else if (this.transform.position.y < 0f) {
-                _rigidbody.AddForce(Vector2.up * speed); // Di chuyển thanh trượt lên trên
+            // Move the paddle back to its original position (center) when the ball is not approaching
+            if (this.transform.position.y > 0f)
+            {
+                _rigidbody.AddForce(Vector2.down * speed); // Add force to move the paddle go down 
+            }
+            else if (this.transform.position.y < 0f)
+            {
+                _rigidbody.AddForce(Vector2.up * speed); // Add force to move the paddle go up 
             }
         }
     }

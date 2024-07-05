@@ -3,34 +3,65 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Ball ball;
-     public Paddle playerpaddle;
-          public Paddle ComputerPaddle;
-          
+    [SerializeField] private Ball ball;
+    [SerializeField] private Paddle playerPaddle;
+    [SerializeField] private Paddle computerPaddle;
+    [SerializeField] private Text playerScoreText;
+    [SerializeField] private Text computerScoreText;
 
-    public Text textforPlayer;
-    public Text textforComputer;
-    private int PlayerScore;
-    private int ComputerScore;
-    public void ScoreforPlayer(){
+    private int playerScore;
+    private int computerScore;
+
+    public int PlayerScore
+    {
+        get { return playerScore; }
+        private set
+        {
+            playerScore = value;
+            playerScoreText.text = playerScore.ToString();
+        }
+    }
+
+    public int ComputerScore
+    {
+        get { return computerScore; }
+        private set
+        {
+            computerScore = value;
+            computerScoreText.text = computerScore.ToString();
+        }
+    }
+
+    private void Start()
+    {
+        ResetGame();
+    }
+
+    public void ScoreForPlayer()
+    {
         PlayerScore++;
-        this.textforPlayer.text=PlayerScore.ToString();
-
-        ball.ResetPosition();
-        this.playerpaddle.ResetPosition();
-        this.ComputerPaddle.ResetPosition();
-        Debug.Log("PlayerSocre!!!!!");
-        
+        ResetPositions();
+        Debug.Log("Player Score!!!");
     }
-    public void ScoreforComputer(){
+
+    public void ScoreForComputer()
+    {
         ComputerScore++;
-        this.textforComputer.text=ComputerScore.ToString();
-
-         ball.ResetPosition();
-        this.playerpaddle.ResetPosition();
-        this.ComputerPaddle.ResetPosition();
-          Debug.Log("ComputerScore!!!!!");
+        ResetPositions();
+        Debug.Log("Computer Score!!!");
     }
-  
-    // Start is called before the first frame update
+
+    private void ResetPositions()
+    {
+        ball.ResetPosition();
+        playerPaddle.ResetPosition();
+        computerPaddle.ResetPosition();
+    }
+
+    private void ResetGame()
+    {
+        PlayerScore = 0;
+        ComputerScore = 0;
+        ResetPositions();
+    }
 }

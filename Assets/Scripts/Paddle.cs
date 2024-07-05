@@ -3,13 +3,24 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-      protected Rigidbody2D _rigidbody;
-        public float speed=10f;
-    private void Awake(){ //function that unity provied for unity automatically call( call one time during the life cycle of game object)
-        _rigidbody=GetComponent<Rigidbody2D>();// search the same object which have the datatype is RigidBody 2D 
+
+    [SerializeField]
+    protected float speed = 10f;
+    protected Rigidbody2D _rigidbody;
+
+
+    private void Awake()
+    {
+        // Search for the Rigidbody2D component on the same GameObject.
+        _rigidbody = GetComponent<Rigidbody2D>();
+
     }
-    public void ResetPosition(){
-    _rigidbody.position=new Vector2(_rigidbody.position.x,0);
-    _rigidbody.velocity=Vector3.zero;
-}
+
+    public void ResetPosition()
+    {
+        //Reset the ball to its original position.
+        _rigidbody.position = new Vector2(_rigidbody.position.x, 0);
+        _rigidbody.velocity = Vector3.zero;
+    }
+
 }
